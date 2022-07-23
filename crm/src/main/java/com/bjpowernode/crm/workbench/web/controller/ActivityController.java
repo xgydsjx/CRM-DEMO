@@ -36,7 +36,8 @@ public class ActivityController {
         //请求转发到市场活动的主页面
         return "workbench/activity/index";
     }
-    @RequestMapping("/workbench/activity/saveCreateActivty.do")
+
+    @RequestMapping("/workbench/activity/saveCreateActivity.do")
     @ResponseBody
     public Object  saveCreateActivty(Activity activity, HttpSession session){
         User  user =(User) session.getAttribute(Contants.SESSION_USER);
