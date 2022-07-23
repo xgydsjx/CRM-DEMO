@@ -19,9 +19,87 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 <script type="text/javascript">
 
 	$(function(){
-		
-		
-		
+	//给创建按钮添加单击事件
+		$("#createActivityBtn").click(function () {
+
+			//初始化页面
+			$("#createActivityForm").get(0).reset();
+
+		});
+
+		//给保存按钮添加单击事件
+		$("#saveBtn").click(function () {
+			//收集参数
+			var owner = $("#create-marketActivityOwner").val();
+			var name= $("#create-marketActivityName").val();
+			var startDate = $("#create-startTime").val();
+			var endDate = $("#create-endTime").val();
+			var cost = $.trim($("#create-cost").val());
+			var description = $("#create-describe").val();
+
+			//判断所有者和名称不能为空
+			if (owner==""){
+				alert("所有者不能为空")
+				return;
+			}
+			if (name==""){
+				alert("名称不能为空")
+				return;
+			}
+			//开始日期和结束日期都不为空,则结束日期不能比开始日期小
+			if (startDate!==""&&endDate!==""){
+
+				if (endDate<startDate){
+					alert("结束日期不能小于开始日期")
+					return;
+				}
+			}
+
+			//成本只能为非负整数
+			//此处要使用正则表达式去进行判断
+			//:在js中定义一个正则表达式.  var regExp=/...../;
+			/*	regexObj.test(str)
+
+			参数是一个字符串类型的值，返回true或者false，如果匹配返回true，否则返回false。*/
+			var regExp=/^(([1-9]\d*)|0)$/;
+
+			if (!regExp.test(cost)){
+				alert("成本不能为非负整数");
+				return;
+			}
+			/**
+			 * 创建成功之后,关闭模态窗口,刷新市场活动列，显示第一页数据，保持每页显示条数不变
+			 */
+			//发送请求
+			$.ajax({
+				url:"workbench/activity/saveCreateActivty.do",
+				data:{
+					owner:owner,
+					name:name,
+					startDate:startDate,
+					endDate:endDate,
+					cost:cost,
+					description:description
+				},
+				type:'post',
+				dataType:'json',
+
+				success:function (data) {
+					if (data.code=="1"){
+						//关闭模态窗口
+					$("#createActivityModal").modal("hide");
+					}else {
+						alert(data.message)
+						$("#createActivityModal").modal("show");
+					}
+				}
+
+			})
+
+
+
+		});
+
 	});
 	
 </script>
@@ -40,8 +118,8 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				</div>
 				<div class="modal-body">
 				
-					<form class="form-horizontal" role="form">
-					
+					<form  id="createActivityForm" class="form-horizontal" role="form">
+
 						<div class="form-group">
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
@@ -86,7 +164,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button type="button" class="btn btn-primary"  id="saveBtn" data-dismiss="modal">保存</button>
 				</div>
 			</div>
 		</div>
@@ -243,7 +321,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.ge
 			</div>
 			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createActivityModal"><span class="glyphicon glyphicon-plus"></span> 创建</button>
+				  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createActivityModal" id="createActivityBtn"><span class="glyphicon glyphicon-plus"></span> 创建</button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
