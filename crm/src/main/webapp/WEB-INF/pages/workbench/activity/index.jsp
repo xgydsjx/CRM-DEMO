@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
 
     <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link  href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+    <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
     <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
     <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
@@ -110,18 +110,6 @@
                     }
                 });
             });
-            $(".mydate").datetimepicker({
-                language:'zh-CN',
-                format:'yyyy-mm-dd',
-                minView:'month',
-                initialDate:new Date(),
-                autoclose:true,
-                todayBtn:true,
-                clearBtn:true
-            });
-
-
-
 
 
         });
@@ -162,11 +150,11 @@
                     <div class="form-group">
                         <label for="create-startDate" class="col-sm-2 control-label">开始日期</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control mydate" id="create-startDate">
+                            <input type="text" class="form-control" id="create-startDate">
                         </div>
                         <label for="create-endDate" class="col-sm-2 control-label">结束日期</label>
                         <div class="col-sm-10" style="width: 300px;">
-                            <input type="text" class="form-control mydate" id="create-endDate">
+                            <input type="text" class="form-control" id="create-endDate">
                         </div>
                     </div>
                     <div class="form-group">
