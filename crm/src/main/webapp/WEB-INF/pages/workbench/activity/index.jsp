@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
 
     <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css"
           href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css"
@@ -108,8 +107,8 @@
                         if(data.code=="1"){
                             //关闭模态窗口
                             $("#createActivityModal").modal("hide");
-                            //刷新市场活动列，显示第一页数据，保持每页显示条数不变(保留)
-
+                            //刷新市场活动列，显示第一页数据，保持每页显示条数不变
+                            queryActivityByConditionForPage(1,$("#demo_pag1").bs_pagination('getOption', 'rowsPerPage'));
                         }else{
                             //提示信息
                             alert(data.message);
@@ -414,14 +413,14 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">名称</div>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="query-name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">所有者</div>
-                        <input class="form-control" type="text">
+                        <input class="form-control" type="text" id="query-owner">
                     </div>
                 </div>
 
@@ -429,17 +428,17 @@
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">开始日期</div>
-                        <input class="form-control" type="text" id="startTime" />
+                        <input class="form-control" type="text" id="query-startDate" />
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-addon">结束日期</div>
-                        <input class="form-control" type="text" id="endTime">
+                        <input class="form-control" type="text" id="query-endDate">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-default">查询</button>
+                <button type="button" class="btn btn-default" id="queryActivityBtn">查询</button>
 
             </form>
         </div>
@@ -459,15 +458,15 @@
             <table class="table table-hover">
                 <thead>
                 <tr style="color: #B3B3B3;">
-                    <td><input type="checkbox" /></td>
+                    <td><input type="checkbox" id="chckAll"/></td>
                     <td>名称</td>
                     <td>所有者</td>
                     <td>开始日期</td>
                     <td>结束日期</td>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="active">
+                <tbody id="tBody">
+                <%--<tr class="active">
                     <td><input type="checkbox" /></td>
                     <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
                     <td>zhangsan</td>
@@ -480,14 +479,15 @@
                     <td>zhangsan</td>
                     <td>2020-10-10</td>
                     <td>2020-10-20</td>
-                </tr>
+                </tr>--%>
                 </tbody>
             </table>
+            <div id="demo_pag1"></div>
         </div>
 
-        <div style="height: 50px; position: relative;top: 30px;">
+        <%--<div style="height: 50px; position: relative;top: 30px;">
             <div>
-                <button type="button" class="btn btn-default" style="cursor: default;">共<b>50</b>条记录</button>
+                <button type="button" class="btn btn-default" style="cursor: default;">共<b id="totalRowsB">50</b>条记录</button>
             </div>
             <div class="btn-group" style="position: relative;top: -34px; left: 110px;">
                 <button type="button" class="btn btn-default" style="cursor: default;">显示</button>
@@ -518,7 +518,7 @@
                     </ul>
                 </nav>
             </div>
-        </div>
+        </div>--%>
 
     </div>
 
