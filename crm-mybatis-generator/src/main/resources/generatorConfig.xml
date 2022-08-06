@@ -70,7 +70,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
+                <!--tableName = 对应数据表的名称-->
+            <!--domainObjectName= 生成实体类的名称-->
 <!--        <table tableName="tbl_user" domainObjectName="User"-->
 <!--               enableCountByExample="false" enableUpdateByExample="false"-->
 <!--               enableDeleteByExample="false" enableSelectByExample="false"-->
