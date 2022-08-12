@@ -78,5 +78,22 @@ public interface ActivityMapper {
      *
      */
     int updateActivity(Activity activity);
+    /**
+     * 批量导出市场活动
+     */
 
+    List<Activity> selectAllActivities();
+
+    /**·
+     *导入市场活动
+     */
+
+    int insertActivityByList(List<Activity> activityList);
+
+    /**
+     * 根据id查询市场活动的明细信息
+     * @param id
+     * @return
+     */
+    Activity selectActivityForDetailById(String id);
 }

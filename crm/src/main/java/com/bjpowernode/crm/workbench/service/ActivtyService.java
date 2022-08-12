@@ -21,4 +21,19 @@ public interface ActivtyService {
      */
     int saveActivity(Activity activity);
 
+    /**
+     * 批量导出市场活动
+     */
+    List<Activity> queryActivities();
+
+    /**
+     * 导入市场活动
+     */
+     int saveCreateActivityByList(List<Activity> activityList);
+
+    /**
+     * 查看市场明细
+     */
+    Activity queryActivityForDetailByID(String id);
+
 }
